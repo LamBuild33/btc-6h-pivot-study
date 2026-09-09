@@ -43,8 +43,8 @@ needs a bar to confirm, and it is the most transferable thing here.
 
 Five results looked significant and dissolved, all from two confounds: leg
 size (any cumulative quantity scales with the leg, and bigger legs have
-more room to fall) and measurement span (a pivot that survives the full
-32-bar window accumulates more drop than one invalidated after 2).
+more room to fall) and measurement span (in the OI legs, which have no
+window cap, one pivot survived 116 bars and another 2).
 
 The part worth carrying elsewhere: **out-of-sample replication did not
 catch either confound.** `cvd_change` replicated at r = +0.696 and +0.663
@@ -91,7 +91,9 @@ src/pivot_auto.py             pivot detection, regime tagging, threshold sweep
 src/exit_test.py              alternative exit rules vs exiting at the pivot
 src/fetch.py                  Coinbase pull (Binance returns 451 to US IPs)
 data/btc_6h.csv               pinned 6H candles, 2023-07-31 to 2026-08-28
-data/oi_legs_handlogged.csv   51 hand-read OI legs — see FINDINGS.md
+data/oi_legs_batch1.csv       21 hand-read OI legs, Feb-May 2026
+data/oi_legs_batch2.csv       30 hand-read OI legs, Jul-Aug 2026
+data/pivots_handlogged.csv    88 hand-logged pivots, Binance perp
 FINDINGS.md                   the full record
 ```
 
@@ -115,8 +117,8 @@ and automation on Coinbase spot both returned 30%.
 ## Limitations
 
 Collected in one place in FINDINGS.md rather than scattered. The short
-version: the OI data is 51 hand-read legs with no per-leg timestamps and
-cannot be verified against an exchange API; no control group of random
+version: the OI data is 51 hand-read legs, reproducible from the committed
+files but not independently verifiable against an exchange API; no control group of random
 entries was ever collected; the exit comparison ranks rules over a fixed
 window but is not a full trade simulation (no re-entry, compounding, or
 sizing); and everything here is 6H BTC, single instrument.

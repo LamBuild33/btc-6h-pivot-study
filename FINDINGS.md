@@ -44,22 +44,28 @@ is possible.
 
 ### On the OI data
 
-The 51 legs in `data/oi_legs_handlogged.csv` were read manually off TradingView
-charts (BTCUSDT.P, Binance) in two batches: batch 1 from approximately
-2026-02-05 to 2026-05-13, batch 2 from approximately 2026-06-05 to 2026-08-13.
+The 51 legs were read manually off TradingView charts (BTCUSDT.P, Binance) in
+two batches, committed separately because the columns differ:
+
+| file | n | window | extra columns |
+|---|---|---|---|
+| `data/oi_legs_batch1.csv` | 21 | 2026-02-06 to 2026-05-23 | `leg_volume` |
+| `data/oi_legs_batch2.csv` | 30 | 2026-07-01 to 2026-08-24 | `drift`, `depth` |
 
 Batch 1 was a countertrend advance — a bear flag that resolved into a lower low,
 and the source of the cascade in the sample. Batch 2 was sampled from a rally
-whose larger structure had not resolved at time of writing; individual legs were
-scored on a fixed window and are final.
+whose larger structure had not resolved at time of writing. Both batches score
+each leg on its own resolution, so every row is final.
 
-Per-leg timestamps were not recorded — only the batch windows are known — so the
-readings cannot be verified against an exchange API and the legs cannot be
-joined to the automated pivot set. The analysis in this section is fully
-re-runnable from the committed file; the collection is not. The `eff` hypothesis
-was declared before batch 2 was collected, and the batches are non-overlapping
-in time, so the direction-consistency checks in section 3 compare independent
-market periods.
+Unlike the two pivot pipelines, which cap the forward window at 32 bars, the OI
+legs run to invalidation with no ceiling — `bars_held` reaches 103 in batch 1
+and 116 in batch 2. That is what makes measurement span such a strong confound
+here, and it is why section 3 uses these legs to illustrate it.
+
+Every correlation in this section is reproducible from the two files. The
+`eff` hypothesis was declared before batch 2 was collected, and the batches are
+non-overlapping in time, so the direction-consistency checks in section 3
+compare independent market periods.
 
 At n = 51 this is a documented negative, not a verified one — enough to remove
 OI from the system, not enough to conclude OI carries no information. A weak
@@ -117,10 +123,11 @@ Controlling for gain killed every one of them.
 
 ### Measurement span
 
-`max_drop` is measured until the pivot is invalidated. A pivot that survived the
-full 32-bar span had far longer to accumulate a decline than one invalidated
-after 2 bars. Both pipelines cap the forward window at 32, so span runs 1 to 32
-and the confound is bounded but present throughout.
+`max_drop` is measured until the pivot is invalidated. In the OI legs, where the
+forward window has no ceiling, a pivot that survived 116 bars had far longer to
+accumulate a decline than one that survived 2. Both pivot pipelines cap the
+window at 32, which bounds the confound without removing it — the automated set
+still prints rho = +0.845 between span and max_drop.
 
 ```
 span vs max_drop:  rho = 0.85 to 0.91

@@ -1,0 +1,31 @@
+date,leg,eff,drift,depth,bars,pct,sma50,sma50_slope,sma150,cvd_change,avwap,bb_position,bars_held,max_drop,bars_to_35
+2026-07-01 12:00,-4.1,-0.66,0.67,0,3,65,below,falling,below,24000,above,inside,3,2.88,
+2026-07-02 06:00,1.3,0.3,0.5,0.9,2,97,above,falling,below,14500,above,at upper,4,1.51,
+2026-07-03 12:00,-1.1,-0.4,0.67,0,3,92,above,falling,below,10300,above,inside,3,1.04,
+2026-07-05 12:00,0.1,-0.37,0.5,0.4,6,81,above,falling,below,16800,above,inside,4,4.22,3
+2026-07-06 12:00,-1.2,-0.21,1,0,1,52,above,falling,above,8400,above,at upper,32,4.88,6
+2026-07-09 00:00,-1.9,-0.67,1,0,3,22,above,rising,below,3500,above,inside,3,1.35,
+2026-07-10 06:00,3.5,0.97,0,0,4,62,above,rising,above,18700,above,inside,17,4.43,14
+2026-07-14 12:00,-1.8,-0.34,0.75,1.7,4,82,above,rising,above,27400,above,inside,23,4.72,13
+2026-07-17 12:00,-0.4,-0.12,1,0,1,29,above,rising,above,22,above,inside,3,0.77,
+2026-07-18 18:00,1.9,1.12,0.25,0,4,58,above,rising,above,5800,above,inside,5,1.85,
+2026-07-21 06:00,2.9,0.58,0.2,1.3,5,87,above,rising,above,31900,above,at upper,116,7,16
+2026-07-24 00:00,-0.5,-0.26,0.67,0,3,75,above,rising,above,3500,above,inside,105,5.39,17
+2026-07-25 18:00,0.7,0.48,0.83,0.2,6,93,below,rising,above,-4400,above,inside,2,0.5,
+2026-07-26 12:00,-2.9,-1.43,1,0,2,71,above,rising,above,10900,above,inside,95,5.1,5
+2026-07-29 00:00,-1,-0.29,0.67,0.2,3,53,below,rising,above,5700,above,inside,4,2.22,
+2026-07-30 06:00,2.1,0.68,0,0,3,90,above,falling,above,2100,above,inside,40,4.48,7
+2026-08-01 18:00,0.5,0.24,0,0,1,98,below,falling,above,3200,below,inside,6,2.12,
+2026-08-03 18:00,-2.4,-0.77,0.33,0.3,3,93,below,falling,above,17600,above,inside,4,1.25,
+2026-08-04 12:00,-0.8,-0.47,1,0,2,88,above,falling,above,-200,above,inside,3,1,
+2026-08-05 12:00,-2,-1.07,1,0,1,81,above,falling,above,1250,above,at upper,11,1.37,
+2026-08-07 06:00,1.2,0.6,0.5,0.6,4,82,above,falling,above,2000,above,at upper,48,4.4,26
+2026-08-09 12:00,0.1,0.06,0.5,0.6,8,77,above,falling,above,3600,above,at upper,39,4.56,18
+2026-08-12 06:00,1.5,0.74,0.67,1.3,3,99,below,falling,below,-7600,above,inside,21,3.02,
+2026-08-16 06:00,-1,-0.72,0.75,0,8,95,below,falling,below,2800,below,inside,2,1.08,
+2026-08-17 12:00,-4.1,-1.34,1,0,4,58,above,falling,below,17100,above,at upper,3,0.91,
+2026-08-19 06:00,2.8,0.28,0.75,2.1,4,89,above,rising,below,70300,above,outside upper,3,3.46,
+2026-08-21 00:00,0.3,0.02,0.5,0,6,72,above,rising,above,63500,above,at upper,15,5.02,1
+2026-08-21 18:00,-0.07,-0.02,1,0,2,44,above,rising,above,-800,above,inside,10,4.08,4
+2026-08-23 12:00,-1.5,-0.45,1,0,3,39,above,rising,above,9600,above,inside,2,1.89,
+2026-08-24 06:00,1.9,0.44,0,0,2,73,above,rising,above,10500,above,inside,2,1.85,
