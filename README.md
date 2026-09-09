@@ -10,8 +10,8 @@ tested, one hypothesis pre-declared before collection. Everything here is
 reproducible from the committed data.
 
 **The methods content, if that's what brings you here:** a pre-registered
-hypothesis that failed its own test; five false positives traced to two
-structural confounds; a look-ahead bias caught by an implausible win rate; and
+hypothesis that failed its own test; six false positives traced to three
+structural confounds, one of them caught prospectively; a look-ahead bias caught by an implausible win rate; and
 a cross-check where two independent collection methods on two exchanges
 returned the same figure to within half a percent. Section 3 of FINDINGS.md is
 the part worth reading.
@@ -49,6 +49,7 @@ it is the most transferable finding here.
 | ATR threshold selecting better pivots | no — hold rate flat 1.5 to 4.0 |
 | Sequence position within an advance | no — flips direction with the gap cut |
 | Anything predicting which pivots hold | no — best is r = +0.083 |
+| Swing lows vs highs — same behaviour? | asymmetry found, then attributed to sample drift |
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 

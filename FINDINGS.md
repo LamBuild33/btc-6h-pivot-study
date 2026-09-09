@@ -138,6 +138,42 @@ p < 0.0001, replicating in *both* regimes separately). Control for span and it
 is rho = −0.088, p = 0.415. Among pivots with an identical 32-bar span, the
 relationship is gone entirely.
 
+### Sample drift
+
+The study tested swing highs only. Running the mirror on swing lows — same
+qualification rule, same 32-bar span, directions flipped — returned a hold rate
+of 37.5% (233/622) against 30.0% for highs, and a confirmation lag of 1.90%
+against 1.57%. Both were outside the bands declared before the run.
+
+Splitting by year shows what produced it:
+
+| year | BTC return | highs hold | lows hold | gap |
+|---|---|---|---|---|
+| 2023 (5 months) | +44% | 23.1% | 47.3% | +24.2 |
+| 2024 | +121% | 29.6% | 38.1% | +8.5 |
+| 2025 | −6% | 33.0% | 34.7% | **+1.7** |
+| 2026 | −11% | 29.9% | 33.8% | **+4.0** |
+
+Pooling the two rising years gives 27.8% against 41.0%, a gap of +13.1 points
+(chi-square p = 0.001). Pooling the two flat years gives 31.7% against 34.3%,
+a gap of +2.6 points (p = 0.53). The asymmetry exists only where price rose.
+
+A test asking *does price continue in this direction* will favour whichever
+direction the sample drifted. Over a window with +165% total return, lows hold
+more often because price kept going up — not because lows are structurally
+different from highs.
+
+The regime breakdown points the other way, showing the gap largest in
+downtrends (+10.1 against +8.2 in uptrends). Regime here is a rolling 120-bar
+label, not a measured return, so where the two disagree the year comparison is
+the better instrument. Worth recording that they disagree rather than reporting
+only the one that resolved.
+
+This is the only confound in this document caught prospectively. The prediction
+was written down before the run — 27–33% hold rate, 1.4–1.7% lag — so when the
+result landed outside it, the question was what else could produce it rather
+than how to describe it.
+
 ### Why out-of-sample replication did not catch these
 
 `cvd_change` replicated at r = +0.696 and +0.663 across independent batches and
@@ -471,6 +507,7 @@ the same asset. Not addressed anywhere.
 | ATR threshold selecting better pivots | no — hold rate flat 1.5 to 4.0 |
 | Sequence position within an advance | no — flips direction with the gap cut |
 | Anything predicting which pivots hold | no — best is r = +0.083 |
+| Swing lows vs highs — do they behave the same? | asymmetry found, then attributed to sample drift |
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 
