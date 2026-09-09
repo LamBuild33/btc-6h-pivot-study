@@ -22,7 +22,7 @@ lands in.
 **A 1.57% confirmation lag.** A 1-1 fractal cannot be known until the next
 bar closes, and that bar is lower by definition. By the time entry is
 possible, price has already fallen a mean 1.57% from the pivot high —
-against a median 2.79% drop on a pivot that fails. Most of the move is
+against a median 2.66% drop on a pivot that fails. Most of the move is
 gone before you can act. This applies to any signal on any instrument that
 needs a bar to confirm, and it is the most transferable thing here.
 
@@ -43,8 +43,8 @@ needs a bar to confirm, and it is the most transferable thing here.
 
 Five results looked significant and dissolved, all from two confounds: leg
 size (any cumulative quantity scales with the leg, and bigger legs have
-more room to fall) and measurement span (a pivot observed for 116 bars
-accumulates more drop than one observed for 2).
+more room to fall) and measurement span (a pivot that survives the full
+32-bar window accumulates more drop than one invalidated after 2).
 
 The part worth carrying elsewhere: **out-of-sample replication did not
 catch either confound.** `cvd_change` replicated at r = +0.696 and +0.663
@@ -56,22 +56,43 @@ confounding variable directly.
 ## Running it
 
 ```bash
+git clone https://github.com/LamBuild33/btc-6h-pivot-study
+cd btc-6h-pivot-study
 pip install -r requirements.txt
-jupyter notebook notebooks/01_reproduce.ipynb
+```
+
+Then, from the repo root:
+
+```python
+import sys; sys.path.insert(0, "src")
+import pandas as pd
+from pivot_auto import find_pivots, add_regime, summarise, sweep
+from exit_test import compare_exits, report
+
+df = pd.read_csv("data/btc_6h.csv", parse_dates=["date"])
+
+# atr_mult 1.5 rather than the 3.0 default: hold rate is flat across
+# thresholds, so a higher setting costs 62% of the sample and buys nothing.
+p = find_pivots(df, atr_mult=1.5)
+p = add_regime(p, df)
+p = summarise(p)          # two populations, hold rate, adverse excursion
+
+sweep(df)                          # ATR sweep -- hold rate flat 1.5 to 4.0
+report(compare_exits(df, p), p)    # the exit test
 ```
 
 `data/btc_6h.csv` is the pinned dataset: 4,500 6H bars of BTC-USD spot,
-2023-07-31 to 2026-08-28, pulled from Coinbase. Re-running `src/fetch.py` today returns extra bars at the
-tail and slightly different pivot counts at the edge — that's new data,
-not a reproducibility failure.
+2023-07-31 to 2026-08-28, pulled from Coinbase. Re-running `src/fetch.py` today
+returns extra bars at the tail and slightly different pivot counts at the edge —
+that's new data, not a reproducibility failure.
 
 ```
-src/pivot_auto.py    pivot detection, regime tagging, threshold sweep
-src/exit_test.py     alternative exit rules vs exiting at the pivot
-src/fetch.py         Coinbase pull (Binance returns 451 to US IPs)
-data/btc_6h.csv      pinned 6H candles, 2023-07-31 to 2026-08-28
+src/pivot_auto.py             pivot detection, regime tagging, threshold sweep
+src/exit_test.py              alternative exit rules vs exiting at the pivot
+src/fetch.py                  Coinbase pull (Binance returns 451 to US IPs)
+data/btc_6h.csv               pinned 6H candles, 2023-07-31 to 2026-08-28
 data/oi_legs_handlogged.csv   51 hand-read OI legs — see FINDINGS.md
-FINDINGS.md          the full record
+FINDINGS.md                   the full record
 ```
 
 ## Robustness

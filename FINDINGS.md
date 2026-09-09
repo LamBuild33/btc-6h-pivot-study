@@ -5,7 +5,7 @@ trustworthy. Written so that future-you does not re-run any of it by accident.
 
 **Instrument:** BTCUSDT.P (hand-logged) and BTC-USD spot (automated), 6H
 **Automated pivots:** 2023-07-31 to 2026-08-28, 4,500 bars, 615 pivots
-**Hand-logged pivots:** 88
+**Hand-logged pivots:** 88, in `data/pivots_handlogged.csv`
 **Hand-logged OI legs:** 51, sampled from two 2026 batches — see the note in
 section 1. This is a six-month window inside the automated period, not three
 years of OI coverage.
@@ -21,7 +21,7 @@ moment it is knowable.** Every stop/target combination tested landed between
 The reason is a **1.57% confirmation lag**. A 1-1 fractal is only confirmed once
 the next bar closes, and that bar is lower by definition. By the time you can
 act, price has already fallen 1.57% on average from the pivot high — against a
-median drop of 2.79% on a failed pivot. Most of the move is gone before entry
+median drop of 2.66% on a failed pivot. Most of the move is gone before entry
 is possible.
 
 **Open interest does not predict swing-high outcomes.** Five constructions,
@@ -71,23 +71,25 @@ effect would need several hundred legs to detect.
 
 | | share | median drop | retrace of leg |
 |---|---|---|---|
-| held the 32-bar span | **30%** | ~9% | > 100% |
-| closed above and failed | 70% | ~2.8% | ~40% |
+| held the 32-bar span | **30%** | 9.91% | > 100% |
+| closed above and failed | 70% | 2.66% | ~40% |
 
 That 30% is stable across:
 
 - **years** — 23%, 30%, 33%, 30% (2023–2026)
 - **regimes** — up 30%, consolidation 29%, down 26%
 - **ATR thresholds** — 30%, 30%, 32%, 30%, 35% (mult 1.5 to 4.0)
-- **two exchanges** — 30% hand-logged on Binance perp, 30% automated on Coinbase spot
+- **two exchanges** — 29.5% hand-logged on Binance perp (n=88), 30.0% automated
+  on Coinbase spot (n=615); median drop when held 9.93% and 9.91% respectively
 - **sequence position** — flat at every gap threshold tried
 
 Nothing measured predicts which population a pivot lands in. It behaves as a
 fixed-odds structure.
 
-**Adverse excursion is small and consistent:** median 0.83% above the pivot
-high, 80th percentile 1.91%, and 43 of 231 never traded above it at all.
-Near-identical in up and down regimes.
+**Adverse excursion is small and consistent:** median 0.80% above the pivot
+high on the automated set, 80th percentile 1.78%, and 121 of 615 never traded
+above it at all. The hand-logged set independently gives 0.84% and 1.68%, with
+13 of 88 never trading above.
 
 Note on measuring this: adverse excursion must be measured only until the pivot
 is invalidated, not across the full 32-bar span. On a failed pivot, price closes
@@ -115,12 +117,10 @@ Controlling for gain killed every one of them.
 
 ### Measurement span
 
-`max_drop` is measured until the pivot is invalidated. A hand-logged pivot that
-survived 116 bars had far longer to accumulate a decline than one that survived
-2. (The 116 comes from the hand-logged set, which had no cap. The automated
-pipeline caps the forward window at 32 bars, so `bars_held` there never exceeds
-32 — the confound is the same, bounded differently.) The rho below is from the
-hand-logged data.
+`max_drop` is measured until the pivot is invalidated. A pivot that survived the
+full 32-bar span had far longer to accumulate a decline than one invalidated
+after 2 bars. Both pipelines cap the forward window at 32, so span runs 1 to 32
+and the confound is bounded but present throughout.
 
 ```
 span vs max_drop:  rho = 0.85 to 0.91
@@ -161,7 +161,7 @@ sweeps that would each have needed their own multi-day collection.
 
 **The automation validated the hand-logging.** Independent measurement on a
 different exchange reproduced the hand results closely — hold rate 30% vs 30%,
-adverse p50 0.83% vs 0.84%. Both were sound.
+adverse p50 0.80% vs 0.84%. Both were sound.
 
 **Watch for implausible results.** A 77% win rate on a 2:1 payoff was the tell
 that revealed look-ahead bias: the simulation was entering at the pivot high,
@@ -476,7 +476,7 @@ fails, ~2.8%. Nothing measured predicts which.
 
 **A 1.57% confirmation lag.** A 1-1 fractal cannot be known until the next bar
 closes, and that bar is lower by definition. Against a median failed-pivot drop
-of 2.79%, most of the move is gone before entry is possible. This is the single
+of 2.66%, most of the move is gone before entry is possible. This is the single
 most transferable finding here — it applies to any signal on any instrument that
 needs a bar to confirm.
 
