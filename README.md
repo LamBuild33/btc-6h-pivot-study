@@ -1,30 +1,43 @@
-# BTC 6H fractal pivots: a null result and a structural cost
+# Swing highs in BTC 6H price data: a null result and a structural cost
 
-Three weeks testing whether qualified swing highs on the 6-hour BTC chart
-can be traded, or used as an exit, or predicted by anything.
+A hypothesis-testing project on observational time-series data. The question:
+do any of a set of measurements predict which local price peaks resolve into
+sustained declines? The answer is no, and most of the value is in how five
+apparently significant results turned out to be confounded.
 
-**They can't.** Every stop/target combination tested lands between −0.22%
-and 0.00% per trade before fees, across 615 pivots. Nothing measured —
-open interest, CVD, volume, five price signals, ATR threshold, position in
-the advance — predicts which pivots become real tops. The best predictor
-found explains under 1% of the variance.
+Three weeks, 615 automated observations plus 139 hand-logged, eleven predictors
+tested, one hypothesis pre-declared before collection. Everything here is
+reproducible from the committed data.
+
+**The methods content, if that's what brings you here:** a pre-registered
+hypothesis that failed its own test; five false positives traced to two
+structural confounds; a look-ahead bias caught by an implausible win rate; and
+a cross-check where two independent collection methods on two exchanges
+returned the same figure to within half a percent. Section 3 of FINDINGS.md is
+the part worth reading.
+
+**The domain result, if you want it:** nothing measured — open interest, CVD,
+volume, five price signals, threshold choice, position in the advance —
+predicts which peaks hold. The best predictor found explains under 1% of the
+variance. Traded at the first moment the signal is knowable, expectancy is
+zero.
 
 Two findings survive:
 
-**A 30% hold rate that behaves like a constant.** 30% of qualified pivots
-are real tops: price drops ~9% and retraces more than the whole prior leg.
-The other 70% drop ~2.8% and continue. That split holds at 23/30/33/30%
-across years, 30/29/26% across up/down/sideways regimes, 30–35% across ATR
-thresholds 1.5 to 4.0, and 30% both hand-logged on Binance perp and
-automated on Coinbase spot. Nothing predicts which population a pivot
-lands in.
+**A 30% hold rate that behaves like a constant.** 30% of qualified peaks are
+real tops: price drops ~9.9% and retraces more than the whole prior advance.
+The other 70% drop ~2.7% and continue. That split holds at 23/30/33/30% across
+years, 30/29/26% across up/down/sideways regimes, 30–35% across detection
+thresholds, and 29.5% hand-logged on Binance perp against 30.0% automated on
+Coinbase spot — two independent measurements, median held-drop 9.93% and 9.91%.
+Nothing predicts which population a peak lands in.
 
-**A 1.57% confirmation lag.** A 1-1 fractal cannot be known until the next
-bar closes, and that bar is lower by definition. By the time entry is
-possible, price has already fallen a mean 1.57% from the pivot high —
-against a median 2.66% drop on a pivot that fails. Most of the move is
-gone before you can act. This applies to any signal on any instrument that
-needs a bar to confirm, and it is the most transferable thing here.
+**A 1.57% confirmation lag.** A local peak cannot be identified until the next
+bar closes, and that bar is lower by definition. By the time the signal exists,
+price has already fallen a mean 1.57% from the peak — against a median 2.66%
+total move on a peak that fails. Most of the effect is gone before it can be
+acted on. This is a general property of any signal requiring confirmation, and
+it is the most transferable finding here.
 
 ## Scoreboard
 
