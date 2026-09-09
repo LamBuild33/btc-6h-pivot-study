@@ -49,7 +49,7 @@ it is the most transferable finding here.
 | ATR threshold selecting better pivots | no — hold rate flat 1.5 to 4.0 |
 | Sequence position within an advance | no — flips direction with the gap cut |
 | Anything predicting which pivots hold | no — best is r = +0.083 |
-| Swing lows vs highs — same behaviour? | asymmetry found, then attributed to sample drift |
+| Swing lows vs highs — same behaviour? | yes, once drift is removed; gap non-significant in 12/12 cells |
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 

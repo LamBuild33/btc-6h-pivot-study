@@ -97,6 +97,13 @@ high on the automated set, 80th percentile 1.78%, and 121 of 615 never traded
 above it at all. The hand-logged set independently gives 0.84% and 1.68%, with
 13 of 88 never trading above.
 
+It is also symmetric. Swing lows give 0.84% and 1.75% below the pivot low. In
+the driftless subsample the tails match almost exactly — p80 of 1.53% for highs
+against 1.52% for lows — while the medians stay slightly apart at 0.70% and
+0.80%. Note both figures fall once drift is removed, so the 0.80% quoted above
+is a full-sample number and the driftless value is lower. The practical reading
+is that the same stop distance applies in both directions.
+
 Note on measuring this: adverse excursion must be measured only until the pivot
 is invalidated, not across the full 32-bar span. On a failed pivot, price closes
 above the high and keeps running, and that continuation is not excursion against
@@ -168,6 +175,22 @@ downtrends (+10.1 against +8.2 in uptrends). Regime here is a rolling 120-bar
 label, not a measured return, so where the two disagree the year comparison is
 the better instrument. Worth recording that they disagree rather than reporting
 only the one that resolved.
+
+Restricting to the two flat years and re-running the full robustness battery
+settles it. Across ATR thresholds 1.5 to 4.0 and pivot separations 2 to 8, the
+gap between lows and highs runs +2.6, +4.7, +3.0, +4.7, −1.4, +2.5, +1.6, +4.7,
++6.5 — mean +3.1, changing sign, and **not one of the twelve cells reaches
+p < 0.05**. The lowest p-value is 0.194. Within each flat year separately the
+gap is +1.7 (p = 0.80) and +4.0 (p = 0.57).
+
+Once drift is removed, lows and highs hold at the same rate. The 37.5% against
+30.0% was entirely a property of a sample that rose 165%.
+
+One cell in the regime breakdown does reach p = 0.048 — consolidation, +9.7
+points. It is reported here rather than omitted, alongside the reason not to
+believe it: uptrends in the same table run −15.2 in the opposite direction, and
+one significant cell out of twelve comparisons is what chance produces
+(0.05 × 12 = 0.6 expected).
 
 This is the only confound in this document caught prospectively. The prediction
 was written down before the run — 27–33% hold rate, 1.4–1.7% lag — so when the
@@ -322,6 +345,11 @@ exits, which is a different pipeline.
 **Higher timeframes.** Everything here is 6H. On 12H or daily the confirmation
 lag would be a larger absolute percentage but the moves are larger too — the
 ratio is the open question.
+
+**Whether lows reach a 3.5% move more often than highs.** 59% against 51% in
+the driftless subsample, an 8-point gap that survived the drift correction
+where the never-adverse gap did not (20/26 became 23/24). It has not been run
+through the robustness battery, so it is an open question rather than a result.
 
 **The volume-normalised CVD ratio** (`cvd_change / leg_volume`). The one
 measurement constructed correctly and never given a fair test: rho = −0.310,
@@ -507,7 +535,7 @@ the same asset. Not addressed anywhere.
 | ATR threshold selecting better pivots | no — hold rate flat 1.5 to 4.0 |
 | Sequence position within an advance | no — flips direction with the gap cut |
 | Anything predicting which pivots hold | no — best is r = +0.083 |
-| Swing lows vs highs — do they behave the same? | asymmetry found, then attributed to sample drift |
+| Swing lows vs highs — do they behave the same? | yes, once drift is removed; gap non-significant in 12/12 cells |
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 
@@ -515,8 +543,15 @@ the same asset. Not addressed anywhere.
 
 **A 30% hold rate that behaves like a constant.** Stable across years, regimes,
 ATR thresholds, pivot separation, two exchanges, and sequence position. When a
-pivot holds, price drops ~9% and retraces more than the whole leg. When it
-fails, ~2.8%. Nothing measured predicts which.
+pivot holds, price drops ~9.9% and retraces more than the whole leg (ratio
+2.21). When it fails, ~2.7% and 0.67. Nothing measured predicts which.
+
+The mirror on swing lows produces the same structure — 10.04% and 2.37 when
+held, 2.99% and 0.78 when failed — so the 30/70 split is not an artifact of
+measuring one direction. In a driftless window the two sides hold at the same
+rate: ~32% for highs and ~34% for lows, with the gap non-significant in all
+twelve robustness cells. Over the full sample lows appear to hold 37.5%, but
+that is sample drift, not structure (section 3).
 
 **A 1.57% confirmation lag.** A 1-1 fractal cannot be known until the next bar
 closes, and that bar is lower by definition. Against a median failed-pivot drop
