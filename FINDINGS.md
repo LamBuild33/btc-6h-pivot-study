@@ -110,6 +110,82 @@ above the high and keeps running, and that continuation is not excursion against
 a live position — you are already out. Measuring across the full span inflates
 the median from 0.8% to 2.8%.
 
+## 2a. Timing
+
+How far price goes is documented above. How long it takes is not, and the two
+answer different questions. This section is descriptive only.
+
+### Time to invalidation
+
+Measured on the pivots that failed — those that closed back beyond the pivot
+within the 32-bar span. The held pivots have no invalidation time by
+definition, so this describes the 70% that failed, not the population.
+
+| | p25 | median | p75 | p90 |
+|---|---|---|---|---|
+| highs (n=431) | 3 | **6** | 12 | 22 |
+| lows (n=389) | 3 | **6** | 14 | 23 |
+
+Six bars is 36 hours on this timeframe. Failures cluster early: 15% are done
+within 2 bars, 35% within 4, roughly 60% within 8, 90% within 22. Highs and
+lows track each other at every percentile — a fourth quantity that mirrors,
+alongside the two populations, the hold rate in a driftless window, and adverse
+excursion.
+
+One mechanical consequence. The 30% hold rate is a statement about a pivot at
+the moment it forms. A pivot that has survived 8 bars sits in a smaller
+population: most of the eventual failures have already occurred, so the
+proportion that will still be alive at bar 32 is higher. Nothing about the
+market changed; the window emptied.
+
+### Time to a favourable move
+
+Measured to a 2.66% move for highs and 2.99% for lows — the median move on a
+failed pivot in each direction, so a level roughly half the failures also
+reach. The search stops at invalidation: a move that arrives after the pivot is
+already dead is not counted.
+
+| | reached | p25 | median | p75 | p90 |
+|---|---|---|---|---|---|
+| highs, on a wick | 65% | 1 | **2** | 4 | 7 |
+| highs, on a close | 52% | 1 | 3 | 6 | 10 |
+| lows, on a wick | 68% | 1 | **2** | 5 | 10 |
+| lows, on a close | 59% | 1 | 3 | 7 | 12 |
+
+Split by outcome, the timing is identical:
+
+| | reached | median bars |
+|---|---|---|
+| highs, held | 100% | 2 |
+| highs, failed | 50% | 2 |
+| lows, held | 100% | 3 |
+| lows, failed | 50% | 2 |
+
+Every pivot that held reached the level. Half the failures reached it too, and
+in the same number of bars. So arrival speed carries no information about which
+population a pivot belongs to — consistent with section 1, where nothing else
+did either.
+
+### A measurement note
+
+An earlier version of this comparison put time-to-target at 3 bars against
+time-to-invalidation at 6 and read it as winners resolving twice as fast. That
+was an artifact. Invalidation requires a *close* beyond the pivot; the target
+was being counted on a *wick* touching the level. Touching precedes settling
+almost always, so part of the gap was definitional.
+
+Measured on the same clock, both on closes, the gap is 5 bars against 6 for
+highs and 4 against 6 for lows — 1 to 2 bars, not 3. At the smaller targets
+above the gap is wider (2 against 6 on a wick, 3 against 6 on a close) because
+a near target is reached long before the invalidation question resolves.
+
+The residual difference between the two clocks is 8 to 13 percentage points of
+hit rate across every target from 2.0% to 4.0%: that share of pivots touches a
+level and does not close beyond it. The gap does not shrink at smaller targets,
+which was predicted and wrong; it sits flat across the range.
+
+---
+
 ## 3. The confounds — the most transferable lesson
 
 Five separate findings looked significant and dissolved. All for the same two
