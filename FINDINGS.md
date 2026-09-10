@@ -480,6 +480,67 @@ report(res, p)
 
 ---
 
+---
+
+## 9a. One exploratory result that survived
+
+**Status: exploratory, not pre-declared, unconfirmed outside this sample.**
+
+This did not come from a declared hypothesis. It emerged while checking whether
+the swing-lows work produced usable benchmarks, after the pre-declared tests in
+sections 1 through 9 were complete. It is reported here with that history stated
+because the rest of this document earns its credibility from being precise about
+how each result was arrived at.
+
+### The result
+
+Given the same target on both sides, price reaches a 2.66% favourable move more
+often from a swing low than from a swing high.
+
+| driftless window (2025–2026), target 2.66% | highs | lows | gap |
+|---|---|---|---|
+| reached on a wick | 61% | 71% | +10.4 (p = 0.006) |
+| reached on a close | 50% | 62% | +12.2 (p = 0.002) |
+
+The full-sample figures are 65% and 73%, gap +8.1 (p = 0.002). The gap is
+*larger* in the driftless window, which is the opposite of what sample drift
+produces — drift inflated the lows hold rate in section 3, and controlling for
+it there collapsed the effect. Here controlling for it strengthens the effect.
+
+### Why it is worth reporting
+
+It holds in all 23 robustness cells, with no sign changes:
+
+| swept | range | gap |
+|---|---|---|
+| ATR threshold | 1.5 – 4.0 | +10.4, +11.2, +9.7, +8.2, +16.5 |
+| pivot separation | 2 – 8 bars | +10.4, +9.2, +7.5, +8.2, +9.0 |
+| target size | 2.0 – 4.0% | +7.7, +9.8, +10.4, +7.9, +7.0 |
+| year | 2023, 2025, 2026 | +14.5, +11.6, +8.7 |
+
+Three of the four years land in the same range, including two the drift control
+excluded — independent of the driftless subsample rather than a re-slice of it.
+2024 is the exception at +2.5, and that is the +121% year, where the highs rate
+climbs to 76% and both sides approach a ceiling that compresses any gap.
+
+This is the pattern the hold-rate asymmetry could not produce. That one ran
+−1.4 to +6.5 across twelve cells, changed sign, and never reached p = 0.05.
+
+### What is not established
+
+The effect is concentrated in consolidation (+13.2, p = 0.009) and close to
+absent in uptrends (+0.5, p = 1.000). That may be the mechanism or may be
+sample composition; nothing here distinguishes them.
+
+More importantly, this is roughly the fifteenth query against the same 615
+observations. The defence is that it holds everywhere rather than somewhere —
+but the number of implicit comparisons preceding it cannot be counted, because
+the path here was exploratory. Confirmation requires data outside this sample:
+a different instrument, or BTC over a different period.
+
+Until then the honest status is: holds across every parameterisation within one
+sample, untested outside it.
+
 ## 10. Limitations
 
 Gathered here rather than scattered, because the total is the honest picture.
@@ -517,6 +578,10 @@ section 6.
 lag is a structural argument that should generalise; nothing else here is
 claimed to.
 
+**Section 9a is exploratory.** It was not pre-declared, it emerged after the
+planned tests were complete, and it has not been tested outside this sample.
+The robustness battery is strong but cannot substitute for fresh data.
+
 **Overlapping positions were never modelled.** 615 pivots at ~7 bars apart with
 32-bar holds means four or five concurrent positions in the same direction on
 the same asset. Not addressed anywhere.
@@ -538,6 +603,7 @@ the same asset. Not addressed anywhere.
 | Swing lows vs highs — do they behave the same? | yes, once drift is removed; gap non-significant in 12/12 cells |
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
+| Lows vs highs reaching a small target | **+10 points for lows**, 23/23 cells — exploratory, see 9a |
 
 ### The two things that are real
 

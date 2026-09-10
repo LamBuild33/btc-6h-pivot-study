@@ -52,6 +52,7 @@ it is the most transferable finding here.
 | Swing lows vs highs — same behaviour? | yes, once drift is removed; gap non-significant in 12/12 cells |
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
+| Lows vs highs reaching a small target | **+10 points for lows**, 23/23 cells — exploratory |
 
 ## If you read one section, read §3 of FINDINGS.md
 
