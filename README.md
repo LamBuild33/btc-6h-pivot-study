@@ -53,7 +53,7 @@ it is the most transferable finding here.
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 | Lows vs highs reaching a small target | **+10 points for lows**, 23/23 cells — exploratory |
-| Scaling the target by leg size | no improvement — helps in consolidation, hurts in downtrends |
+| Scaling the target by leg size | no improvement; ratio is regime-stable but falls with ATR threshold |
 
 ## If you read one section, read §3 of FINDINGS.md
 

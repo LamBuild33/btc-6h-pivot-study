@@ -213,13 +213,40 @@ pooled figures are weighted toward sideways conditions.
 | **all, full sample** | highs | 615 | 4.00 | 2 | 2.66 | 9.91 | 0.67 | 2.21 |
 | **all, full sample** | lows | 622 | 3.67 | 2 | 2.99 | 10.04 | 0.78 | 2.37 |
 
-**The ratio is stable where the percentage is not.** For highs the leg runs 3.26%
-in uptrends to 5.04% in downtrends, and the failed move tracks it from 1.95% to
-4.27% — both move by roughly half. The ratio between them stays at 0.59, 0.66,
-0.69. The same holds for lows at 0.87, 0.83, 0.75.
+**Across regimes, the ratio is stable where the percentage is not.** For highs
+the leg runs 3.26% in uptrends to 5.04% in downtrends, and the failed move
+tracks it from 1.95% to 4.27% — both move by roughly half. The ratio between
+them stays at 0.59, 0.66, 0.69. The same holds for lows at 0.87, 0.83, 0.75.
 
-The percentage figures in section 2 are therefore a snapshot of one regime mix,
-not a constant. The ratio is the quantity that transfers.
+**Across ATR thresholds, the opposite is true.** Raising the displacement
+requirement selects larger legs, and the ratio falls steadily:
+
+| atr_mult | highs: leg | ratio | leg x ratio | lows: leg | ratio | leg x ratio |
+|---|---|---|---|---|---|---|
+| 1.5 | 3.55% | 0.64 | **2.27%** | 3.65% | 0.83 | **3.03%** |
+| 2.0 | 4.58% | 0.56 | **2.56%** | 4.61% | 0.66 | **3.04%** |
+| 2.5 | 5.13% | 0.49 | **2.51%** | 5.06% | 0.56 | **2.83%** |
+| 3.0 | 5.66% | 0.42 | **2.38%** | 5.69% | 0.47 | **2.67%** |
+
+The leg grows 60% across that sweep. The ratio falls by a third. The product —
+the actual move in percent — stays within 2.27-2.56% for highs and 2.67-3.04%
+for lows.
+
+**So a larger leg does not buy a larger pullback.** The pullback is roughly
+constant in percent, and the ratio falls because the leg grew while the move
+did not.
+
+The two results are not in conflict, and the difference is instructive. Regime
+changes the leg in price terms, but ATR moves with it, so the leg measured in
+ATR units stays similar and the ratio holds. Raising the threshold changes the
+leg in ATR units directly, which is what the ratio is sensitive to. Regime
+conditioning and displacement conditioning are different operations and the
+ratio responds to them differently.
+
+**Practical consequence: the ratio is regime-stable but displacement-dependent,
+and across thresholds the percentage is the more constant of the two.** A ratio
+quoted without its ATR multiple is incomplete. Every ratio in this section is
+at `atr_mult = 1.5`.
 
 **Leg length in bars does not vary at all.** Median 2 in every regime, both
 directions. A downtrend leg is not longer, it is steeper.
@@ -294,8 +321,10 @@ target size implies. This restates the target sweep in section 9a: target size
 is a dial trading hit rate against move size, and nothing in the data privileges
 a point on it.
 
-So the ratio is a better description of the structure than the percentage, and
-not a better rule for acting on it.
+So the ratio describes the regime dimension well and the displacement dimension
+badly, and in neither case does scaling the target by it improve hit rate. The
+percentage is the more portable figure across thresholds; the ratio is the more
+portable figure across regimes. Neither is a constant, and neither is a rule.
 
 ---
 
@@ -793,7 +822,7 @@ the same asset. Not addressed anywhere.
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 | Lows vs highs reaching a small target | **+10 points for lows**, 23/23 cells — exploratory, see 9a |
-| Scaling the target by leg size | no improvement — helps in consolidation, hurts in downtrends |
+| Scaling the target by leg size | no improvement; ratio is regime-stable but falls with ATR threshold |
 
 ### The two things that are real
 
