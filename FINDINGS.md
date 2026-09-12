@@ -186,6 +186,119 @@ which was predicted and wrong; it sits flat across the range.
 
 ---
 
+## 2b. Regime conditioning and the leg ratio
+
+Sections 2 and 2a report full-sample medians. This section conditions them on
+regime, in the driftless window (2025-2026) so that sample drift is not
+confounding the comparison. Descriptive only.
+
+Regime is the `add_regime` label: net close-to-open change over the prior 120
+bars divided by the high-low range of that window, thresholded at +/-0.5. A
+trend spends most of its range going one way; a consolidation ends near where it
+started despite covering ground. 336 of 615 pivots fall in consolidation, so the
+pooled figures are weighted toward sideways conditions.
+
+### Leg and move, by regime
+
+| regime | side | n | leg % | leg bars | failed move | held move | failed ratio | held ratio |
+|---|---|---|---|---|---|---|---|---|
+| consolidation | highs | 208 | 3.38 | 2 | 2.10 | 10.65 | 0.66 | 2.79 |
+| consolidation | lows | 194 | 3.44 | 2 | 2.56 | 8.44 | 0.83 | 2.38 |
+| up | highs | 68 | 3.26 | 2 | 1.95 | 6.67 | 0.59 | 1.75 |
+| up | lows | 51 | 2.84 | 2 | 2.99 | 7.68 | 0.87 | 2.23 |
+| down | highs | 55 | 5.04 | 2 | 4.27 | 10.69 | 0.69 | 2.74 |
+| down | lows | 84 | 4.98 | 2 | 3.77 | 10.77 | 0.75 | 1.67 |
+| **all, driftless** | highs | 331 | 3.55 | 2 | 2.23 | 9.57 | 0.64 | 2.33 |
+| **all, driftless** | lows | 329 | 3.65 | 2 | 2.99 | 9.00 | 0.83 | 2.17 |
+| **all, full sample** | highs | 615 | 4.00 | 2 | 2.66 | 9.91 | 0.67 | 2.21 |
+| **all, full sample** | lows | 622 | 3.67 | 2 | 2.99 | 10.04 | 0.78 | 2.37 |
+
+**The ratio is stable where the percentage is not.** For highs the leg runs 3.26%
+in uptrends to 5.04% in downtrends, and the failed move tracks it from 1.95% to
+4.27% — both move by roughly half. The ratio between them stays at 0.59, 0.66,
+0.69. The same holds for lows at 0.87, 0.83, 0.75.
+
+The percentage figures in section 2 are therefore a snapshot of one regime mix,
+not a constant. The ratio is the quantity that transfers.
+
+**Leg length in bars does not vary at all.** Median 2 in every regime, both
+directions. A downtrend leg is not longer, it is steeper.
+
+### Hit rate and adverse excursion, by regime
+
+Target 2.66% both sides, wick clock, driftless window.
+
+| regime | side | n | hit % | bars to target | adverse p50 | adverse p80 | bars to failure |
+|---|---|---|---|---|---|---|---|
+| consolidation | highs | 208 | 54% | 2 | 0.67 | 1.42 | 5 |
+| consolidation | lows | 194 | 68% | 3 | 0.70 | 1.39 | 6 |
+| up | highs | 68 | 66% | 4 | 0.73 | 1.51 | 6 |
+| up | lows | 51 | 67% | 2 | 0.84 | 1.38 | 9 |
+| down | highs | 55 | 80% | 2 | 0.82 | 2.03 | 8 |
+| down | lows | 84 | 83% | 1 | 1.08 | 2.24 | 6 |
+| **all** | highs | 331 | 61% | 2 | 0.70 | 1.53 | 6 |
+| **all** | lows | 329 | 71% | 2 | 0.80 | 1.52 | 7 |
+
+Only the consolidation rows carry enough n to read. At 51 to 84 observations the
+standard error on a proportion is 6 to 7 points, so the up and down hit rates
+cannot be distinguished from the pooled figure. The downtrend cells in
+particular sit in a falling window and are subject to the same drift confound in
+reverse (section 3).
+
+Two things are worth recording anyway.
+
+**The pooled hit rate overstates consolidation for highs.** 54% against 61%
+pooled, on 208 of 331 observations. The pooled number is pulled up by the
+trending cells. Lows are steadier at 68% against 71%.
+
+**Adverse excursion is wider in downtrends.** p80 of 2.03% and 2.24% against
+1.38-1.51% elsewhere. Small n, but the direction is unsurprising and the
+quantity is one where being wrong is costly.
+
+### Scaling the target by the leg does not improve hit rate
+
+Given that the ratio is the stable quantity, the obvious question is whether
+setting the target as `leg x ratio` beats a fixed percentage. It does not.
+
+| regime | side | fixed 2.66/2.99 | scaled 0.66/0.83 |
+|---|---|---|---|
+| consolidation | highs | 54% | 62% |
+| consolidation | lows | 63% | 68% |
+| up | highs | 66% | 66% |
+| up | lows | 61% | 67% |
+| down | highs | 80% | 65% |
+| down | lows | 77% | 62% |
+| **all driftless** | highs | 61% | 64% |
+| **all driftless** | lows | 67% | 66% |
+
+Scaling helps in consolidation, where legs are small and the fixed target asks
+for more than the typical move delivers. It hurts in downtrends, where legs are
+large and scaling raises the target to 3.33% and misses fills that the fixed
+target catches. Pooled, the two cancel.
+
+**And the multiple has no optimal value.** Sweeping it against hit rate on the
+driftless window:
+
+| multiple | median target, highs | hit % | median target, lows | hit % |
+|---|---|---|---|---|
+| 0.50 | 1.77 | 76% | 1.82 | 84% |
+| 0.60 | 2.13 | 67% | 2.19 | 78% |
+| 0.66 | 2.34 | 64% | 2.41 | 75% |
+| 0.75 | 2.66 | 58% | 2.74 | 69% |
+| 0.83 | 2.95 | 54% | 3.03 | 66% |
+| 1.00 | 3.55 | 48% | 3.65 | 54% |
+
+A smooth monotonic slide with no plateau. 0.66 is not a discovered constant, it
+is where the median happened to fall — any multiple returns the hit rate its
+target size implies. This restates the target sweep in section 9a: target size
+is a dial trading hit rate against move size, and nothing in the data privileges
+a point on it.
+
+So the ratio is a better description of the structure than the percentage, and
+not a better rule for acting on it.
+
+---
+
 ## 3. The confounds — the most transferable lesson
 
 Five separate findings looked significant and dissolved. All for the same two
@@ -680,6 +793,7 @@ the same asset. Not addressed anywhere.
 | Pivot as a **short** signal | **zero expectancy**, −0.22% to 0.00% |
 | Pivot as an **exit** signal | near-wash vs tight trailing stops, loses to holding |
 | Lows vs highs reaching a small target | **+10 points for lows**, 23/23 cells — exploratory, see 9a |
+| Scaling the target by leg size | no improvement — helps in consolidation, hurts in downtrends |
 
 ### The two things that are real
 
