@@ -759,6 +759,33 @@ a different instrument, or BTC over a different period.
 Until then the honest status is: holds across every parameterisation within one
 sample, untested outside it.
 
+---
+
+## Implementation
+
+The findings have been implemented as a private charting tool — a Pine
+indicator that projects the fake, real-turn and median-leg levels from each
+confirmed pivot and switches the stop distance on the regime label. It is not
+part of this repository: it encodes trading decisions the research does not
+establish, and keeping the two separate is the point.
+
+Two details of that implementation are worth recording here because they are
+properties of the findings rather than of the tool.
+
+**Confirmed-only display is non-repainting; provisional display is not.** A
+1-1 fractal cannot be drawn until the confirming bar closes, so an indicator
+that draws on the forming bar will sometimes remove levels when the candidate
+pivot fails to confirm. That makes historical review dishonest — the chart
+shows only what survived. The two cases need separate tools, not a toggle, and
+only the confirmed one can be reviewed against history.
+
+**The regime-conditional stop rests on much less evidence than the default.**
+The 1.5% figure comes from 208 highs and 194 lows in consolidation. The 2.2%
+downtrend figure comes from 55 and 84. The direction of the adjustment is
+unsurprising and the cost of a stop that is too tight is asymmetric, so the
+adjustment is worth making — but the two numbers are not equally supported and
+should not be presented as though they were.
+
 ## 10. Limitations
 
 Gathered here rather than scattered, because the total is the honest picture.
