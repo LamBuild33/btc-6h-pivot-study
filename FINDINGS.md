@@ -138,6 +138,67 @@ population: most of the eventual failures have already occurred, so the
 proportion that will still be alive at bar 32 is higher. Nothing about the
 market changed; the window emptied.
 
+**A pivot that stays near its price is different from one that survives.**
+
+The paragraph above is a statement about composition: most failures happen early,
+so the survivors at bar 8 are a smaller and better population, and the marginal
+hazard of invalidation falls with age for that reason alone. That holds. But it is
+not the whole picture, because survivors are not alike. Most of them have moved
+away from the pivot price; the composition effect is largely a distance effect
+wearing a clock. It is the same shape as the measurement note below - a marginal
+figure that looked like an effect and resolved into something else once the right
+variable was held fixed.
+
+Conditioning on distance separates the two. Hazard of invalidation per bar at
+risk, split by how far price sits from the pivot at the start of each bar:
+
+| distance from pivot | age 2-6 | age 7-12 | age 13-32 |
+|---|---|---|---|
+| under 1% | 0.144 | 0.267 | 0.264 |
+| 1-2% | 0.051 | 0.055 | 0.036 |
+| 2-4% | 0.022 | 0.011 | 0.008 |
+| over 4% | 0.000 | 0.005 | 0.001 |
+
+Highs, atr_mult 3.0, full sample. The marginal decline with age is composition:
+958 of 1,830 bar-exposures at ages 13-32 sit beyond 4% of the pivot, against 112
+of 1,199 at ages 2-6. But within the near band the hazard rises rather than falls.
+A pivot still loitering within 1% of its price at bar 13 or later invalidates at
+roughly 1.8 times the rate of one near its price early.
+
+The effect survives clustering. Bar-level rows are not independent - one pivot
+contributes a streak of them - so the intervals below resample pivots rather than
+rows, 2,000 replications:
+
+| | highs | lows |
+|---|---|---|
+| atr_mult 1.5 | 1.70 [1.39, 2.05] | 1.36 [1.07, 1.75] |
+| atr_mult 2.0 | 1.97 [1.55, 2.49] | 1.76 [1.27, 2.39] |
+| atr_mult 2.5 | 1.97 [1.50, 2.61] | 1.74 [1.16, 2.51] |
+| atr_mult 3.0 | 1.87 [1.34, 2.53] | 1.59 [0.98, 2.51] |
+
+Ratio of hazard at ages 13+ to ages 2-6 within the near band, median and 5th-95th
+percentile. Seven of eight lower bounds sit above 1.0; the exception is the
+thinnest cell. The lows track the highs at every threshold with heavily overlapping
+intervals, so this mirrors rather than favouring one side.
+
+It is also robust to how the near band is drawn. Across widths of 0.50, 0.75, 1.00
+and 1.50 percent and age cut points of 8, 10, 12 and 16, the highs hold between
+1.71 and 2.11 in every counted cell. At a width of 2.00 percent the ratio collapses
+to 1.22-1.29 on highs and 1.18-1.29 on lows. That the collapse occurs at the same
+width on both sides is corroborating: a binning artifact would not respect a
+distance boundary symmetrically.
+
+**The reading.** Getting back to within 1% of a pivot at bar 20 requires having
+gone nowhere for twenty bars, and going nowhere is what precedes closing back
+through. Elapsed time is not itself the variable - distance is, and time near the
+pivot is a proxy for a pivot that never worked.
+
+**Limits.** The driftless replication is thin. On highs at atr_mult 3.0 the
+2025-2026 window gives 1.53; on lows it gives a median of 1.70 with a 5th
+percentile of 0.90, which does not establish the effect on that window alone. The
+distance bins were not pre-registered before the first run, though the sensitivity
+grid was. This is one instrument. Reproduced in `03_hazard_distance.ipynb`.
+
 ### Time to a favourable move
 
 Measured to a 2.66% move for highs and 2.99% for lows — the median move on a
